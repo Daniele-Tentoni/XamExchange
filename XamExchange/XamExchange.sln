@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XamExchange.iOS", "XamExcha
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XamExchange", "XamExchange\XamExchange.csproj", "{1D8755F9-7D6F-49F3-AADB-4304A11156A6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XamExchangeTests", "..\XamExchangeTests\XamExchangeTests.csproj", "{F9206359-DEF2-4206-BC43-074789611609}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -73,6 +75,18 @@ Global
 		{1D8755F9-7D6F-49F3-AADB-4304A11156A6}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{1D8755F9-7D6F-49F3-AADB-4304A11156A6}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 		{1D8755F9-7D6F-49F3-AADB-4304A11156A6}.Release|iPhoneSimulator.Deploy.0 = Release|Any CPU
+		{F9206359-DEF2-4206-BC43-074789611609}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9206359-DEF2-4206-BC43-074789611609}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9206359-DEF2-4206-BC43-074789611609}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{F9206359-DEF2-4206-BC43-074789611609}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{F9206359-DEF2-4206-BC43-074789611609}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{F9206359-DEF2-4206-BC43-074789611609}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{F9206359-DEF2-4206-BC43-074789611609}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9206359-DEF2-4206-BC43-074789611609}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9206359-DEF2-4206-BC43-074789611609}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{F9206359-DEF2-4206-BC43-074789611609}.Release|iPhone.Build.0 = Release|Any CPU
+		{F9206359-DEF2-4206-BC43-074789611609}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{F9206359-DEF2-4206-BC43-074789611609}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -13,7 +13,7 @@ namespace XamExchange
         {
             InitializeComponent();
 
-            DependencyService.Register<MockDataStore>();
+            DependencyService.Register<RateDataStore>();
             MainPage = new MainPage();
         }
 

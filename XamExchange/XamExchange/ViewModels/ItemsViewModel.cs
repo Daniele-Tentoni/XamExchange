@@ -25,7 +25,7 @@ namespace XamExchange.ViewModels
             {
                 var newItem = item as Item;
                 Items.Add(newItem);
-                await DataStore.AddItemAsync(newItem);
+                await DataStore.AddOrUpdateItemAsync(newItem);
             });
         }
 
