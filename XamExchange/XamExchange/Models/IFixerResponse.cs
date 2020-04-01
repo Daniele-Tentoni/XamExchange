@@ -1,10 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace XamExchange.Models
+﻿namespace XamExchange.Models
 {
-    interface IFixerResponse
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+
+    public interface IFixerResponse
     {
+        bool IsSuccessful();
     }
 }

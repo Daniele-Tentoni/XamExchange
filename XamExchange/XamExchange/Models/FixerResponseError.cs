@@ -2,9 +2,11 @@
 {
     using Newtonsoft.Json;
 
-    public class FixerResponseError : FixerResponse
+    public class FixerResponseError : IFixerResponse
     {
         [JsonProperty("error")]
         public FixerError Error { get; set; }
+
+        public bool IsSuccessful() => false;
     }
 }

@@ -19,16 +19,20 @@
             };
         }
 
-        public async Task<FixerResponse> GetLatestCurrencyExchange()
+        public async Task<IFixerResponse> GetLatestCurrencyExchange()
         {
             var response = await this.client.GetAsync($"latest&access_key={this.accessKey}");
             var contentString = response.Content.ReadAsStringAsync();
             contentString.Wait();
-            var latest = JsonConvert.DeserializeObject<LatestCurrency>(contentString.Result);
+            IFixerResponse latest;
+            if (response.IsSuccessStatusCode)
+                latest = JsonConvert.DeserializeObject<Currency>(contentString.Result);
+            else
+                latest = JsonConvert.DeserializeObject<FixerResponseError>(contentString.Result);
             return latest;
         }
 
-        public async Task<FixerResponse> GetAllCurrencySymbols()
+        public async Task<IFixerResponse> GetAllCurrencySymbols()
         {
             var response = await this.client.GetAsync($"symbols&access_key={this.accessKey}");
             var contentString = response.Content.ReadAsStringAsync();

@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace XamExchange.Models
+﻿namespace XamExchange.Models
 {
     public enum MenuItemType
     {
-        Browse,
+        Exchange,
+        Currencies,
         About
     }
+
     public class HomeMenuItem
     {
         public MenuItemType Id { get; set; }

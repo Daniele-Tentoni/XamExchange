@@ -18,9 +18,8 @@
         public void TestLatestCurrency()
         {
             var result = this.fixerDataStore.GetLatestCurrencyExchange().Result;
-            Assert.IsTrue(result.Success);
-            var suc = result as LatestCurrency;
-            var successful = (LatestCurrency)result;
+            Assert.IsTrue(result.IsSuccessful());
+            var successful = (Currency)result;
             Assert.IsNotNull(successful.Base);
             Assert.IsNotNull(successful.Date);
             Assert.IsNotNull(successful.Rates);
@@ -30,7 +29,7 @@
         [Test] public void TestGetAllCurrencySymbols()
         {
             var result = this.fixerDataStore.GetAllCurrencySymbols().Result;
-            Assert.IsTrue(result.Success);
+            Assert.IsTrue(result.IsSuccessful());
             var success = result as Symbols;
             Assert.IsNotNull(success.SymbolDictionary);
             var usd = success.SymbolDictionary["USD"];

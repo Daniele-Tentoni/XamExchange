@@ -6,10 +6,10 @@ namespace XamExchange.ViewModels
 {
     public class ItemDetailViewModel : BaseViewModel
     {
-        public Item Item { get; set; }
-        public ItemDetailViewModel(Item item = null)
+        public Currency Item { get; set; }
+        public ItemDetailViewModel(Currency item = null)
         {
-            Title = item?.Text;
+            Title = item.Date;
             Item = item;
         }
     }

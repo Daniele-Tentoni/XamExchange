@@ -1,20 +1,19 @@
-﻿using System;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-using XamExchange.Services;
-using XamExchange.Views;
-
-namespace XamExchange
+﻿namespace XamExchange
 {
+    using Xamarin.Forms;
+    using XamExchange.Models;
+    using XamExchange.Services;
+    using XamExchange.Views;
+
     public partial class App : Application
     {
 
         public App()
         {
-            InitializeComponent();
+            this.InitializeComponent();
 
-            DependencyService.Register<RateDataStore>();
-            MainPage = new MainPage();
+            DependencyService.Register<CurrencyDataStore<Rate>>();
+            this.MainPage = new MainPage();
         }
 
         protected override void OnStart()

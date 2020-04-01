@@ -3,9 +3,14 @@ using Newtonsoft.Json;
 
 namespace XamExchange.Models
 {
-    public class Symbols: FixerResponse
+    public class Symbols: IFixerResponse
     {
-        [JsonProperty(PropertyName = "Symbols")]
+        [JsonProperty(PropertyName = "success")]
+        public bool Success { get; set; }
+
+        [JsonProperty(PropertyName = "symbols")]
         public IDictionary<string, string> SymbolDictionary { get; set; }
+
+        public bool IsSuccessful() => this.Success;
     }
 }

@@ -6,14 +6,13 @@
     using System.Diagnostics;
     using System.Linq;
     using System.Threading.Tasks;
-    using XamExchange.Models;
 
-    class RateDataStore : IDataStore<Rate>
+    public class CurrencyDataStore<T> : IDataStore<T> where T: RealmObject
     {
-        public async Task<bool> AddOrUpdateItemAsync(Rate item)
+        public Task<bool> AddOrUpdateItemAsync(T item)
         {
             var result = true;
-            using (var realm = await Realm.GetInstanceAsync())
+            using (var realm = Realm.GetInstance())
             using (var transition = realm.BeginWrite())
             {
                 try
@@ -32,7 +31,7 @@
                 {
                     Debug.WriteLine($"Add Rate {item}");
                 }
-                return result;
+                return Task.FromResult(result);
             }
         }
 
@@ -40,7 +39,7 @@
         {
             using(var realm = await Realm.GetInstanceAsync())
             {
-                var item = realm.All<Rate>().First(w => w.Name == id);
+                var item = realm.All<T>().First();
                 if (item == null) return false;
 
                 using (var transition = realm.BeginWrite())
@@ -52,13 +51,13 @@
             }
         }
 
-        public async Task<Rate> GetItemAsync(string id)
+        public async Task<T> GetItemAsync(string id)
         {
             using (var realm = await Realm.GetInstanceAsync())
-                return realm.All<Rate>().FirstOrDefault(f => f.Name == id);
+                return realm.All<T>().FirstOrDefault();
         }
 
-        public async Task<IEnumerable<Rate>> GetItemsAsync(bool forceRefresh = false)
+        public async Task<IEnumerable<T>> GetItemsAsync(bool forceRefresh = false)
         {
             /*
             var rateList = new List<Rate>();
@@ -74,7 +73,7 @@
             }
             */
             using (var realm = await Realm.GetInstanceAsync())
-                return realm.All<Rate>();
+                return realm.All<T>();
 
         }
     }

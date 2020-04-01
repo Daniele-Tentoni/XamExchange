@@ -1,9 +1,13 @@
 ﻿namespace XamExchange.Models
 {
     using Newtonsoft.Json;
+    using System.Collections.Generic;
 
-    public class LatestCurrency : FixerResponse
+    public class Currency : IFixerResponse
     {
+        [JsonProperty(PropertyName = "success")]
+        public bool Success { get; set; }
+
         [JsonProperty(PropertyName = "timestamp")]
         public int Timestamp { get; set; }
 
@@ -14,6 +18,8 @@
         public string Date { get; set; }
 
         [JsonProperty(PropertyName = "rates")]
-        public Rates Rates { get; set; }
+        public IDictionary<string, decimal> Rates { get; set; }
+
+        public bool IsSuccessful() => this.Success;
     }
 }

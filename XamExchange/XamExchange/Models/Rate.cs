@@ -1,7 +1,7 @@
-﻿using Realms;
-
-namespace XamExchange.Models
+﻿namespace XamExchange.Models
 {
+    using Realms;
+
     public class Rate : RealmObject
     {
         [PrimaryKey, Indexed]

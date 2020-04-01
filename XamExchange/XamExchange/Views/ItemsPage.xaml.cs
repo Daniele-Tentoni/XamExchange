@@ -1,42 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-
-using XamExchange.Models;
-using XamExchange.Views;
-using XamExchange.ViewModels;
-
-namespace XamExchange.Views
+﻿namespace XamExchange.Views
 {
+    using System;
+    using System.ComponentModel;
+    using Xamarin.Forms;
+
+    using XamExchange.Models;
+    using XamExchange.ViewModels;
+
     // Learn more about making custom code visible in the Xamarin.Forms previewer
     // by visiting https://aka.ms/xamarinforms-previewer
     [DesignTimeVisible(false)]
     public partial class ItemsPage : ContentPage
     {
-        ItemsViewModel viewModel;
+        CurrenciesViewModel viewModel;
 
         public ItemsPage()
         {
-            InitializeComponent();
+            this.InitializeComponent();
 
-            BindingContext = viewModel = new ItemsViewModel();
+            this.BindingContext = this.viewModel = new CurrenciesViewModel();
         }
 
-        async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
+        async void OnCurrencySelected(object sender, SelectedItemChangedEventArgs args)
         {
-            var item = args.SelectedItem as Item;
+            var item = args.SelectedItem as Currency;
             if (item == null)
                 return;
 
-            await Navigation.PushAsync(new ItemDetailPage(new ItemDetailViewModel(item)));
+            // await Navigation.PushAsync(new ItemDetailPage(new ItemDetailViewModel(item)));
 
             // Manually deselect item.
-            ItemsListView.SelectedItem = null;
+            this.CurrencyListView.SelectedItem = null;
         }
 
         async void AddItem_Clicked(object sender, EventArgs e)
@@ -48,8 +42,8 @@ namespace XamExchange.Views
         {
             base.OnAppearing();
 
-            if (viewModel.Items.Count == 0)
-                viewModel.LoadItemsCommand.Execute(null);
+            if (this.viewModel.Currencies.Count == 0)
+                this.viewModel.LoadCurrenciesCommand.Execute(null);
         }
     }
 }
