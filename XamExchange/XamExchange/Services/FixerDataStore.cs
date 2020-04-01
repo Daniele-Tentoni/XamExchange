@@ -28,5 +28,14 @@
             return latest;
         }
 
+        public async Task<FixerResponse> GetAllCurrencySymbols()
+        {
+            var response = await this.client.GetAsync($"symbols&access_key={this.accessKey}");
+            var contentString = response.Content.ReadAsStringAsync();
+            contentString.Wait();
+            var symbols = JsonConvert.DeserializeObject<Symbols>(contentString.Result);
+            return symbols;
+        }
+
     }
 }

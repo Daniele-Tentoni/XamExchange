@@ -26,5 +26,15 @@
             Assert.IsNotNull(successful.Rates);
             Assert.IsNotNull(successful.Timestamp);
         }
+
+        [Test] public void TestGetAllCurrencySymbols()
+        {
+            var result = this.fixerDataStore.GetAllCurrencySymbols().Result;
+            Assert.IsTrue(result.Success);
+            var success = result as Symbols;
+            Assert.IsNotNull(success.SymbolDictionary);
+            var usd = success.SymbolDictionary["USD"];
+            Assert.AreEqual("United States Dollar", usd);
+        }
     }
 }
