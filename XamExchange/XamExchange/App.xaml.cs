@@ -1,7 +1,6 @@
 ﻿namespace XamExchange
 {
     using Xamarin.Forms;
-    using XamExchange.Models;
     using XamExchange.Services;
     using XamExchange.Views;
 
@@ -12,7 +11,7 @@
         {
             this.InitializeComponent();
 
-            DependencyService.Register<CurrencyDataStore<Rate>>();
+            DependencyService.Register<CurrencyDataStore>();
             this.MainPage = new MainPage();
         }
 

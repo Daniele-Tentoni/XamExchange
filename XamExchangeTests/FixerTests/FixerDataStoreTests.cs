@@ -35,5 +35,32 @@
             var usd = success.SymbolDictionary["USD"];
             Assert.AreEqual("United States Dollar", usd);
         }
+
+        [Test] public void TestAddRealmCurrency()
+        {
+            var symbols = this.fixerDataStore.GetAllCurrencySymbols().Result;
+            Assert.IsTrue(symbols.IsSuccessful());
+
+            var currencies = this.fixerDataStore.GetLatestCurrencyExchange().Result;
+            Assert.IsTrue(currencies.IsSuccessful());
+
+            var aeds = ((Symbols)symbols).SymbolDictionary["AED"];
+            var aedc = ((Currency)currencies).Rates["AED"];
+            var realmEntity = new RealmCurrency
+            {
+                Code = "AED",
+                Name = aeds,
+                Rate = (double)aedc
+            };
+
+            var addResult = new CurrencyDataStore().AddOrUpdateItemAsync(realmEntity).Result;
+            Assert.IsTrue(addResult);
+        }
+
+        [Test] public void TestGetRealmCurrency()
+        {
+            var usdr = new CurrencyDataStore().GetItemAsync("AED").Result;
+            Assert.AreEqual("United Arab Emirates Dirham", usdr.Rate);
+        }
     }
 }

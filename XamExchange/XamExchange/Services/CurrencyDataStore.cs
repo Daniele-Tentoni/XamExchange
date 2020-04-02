@@ -6,10 +6,11 @@
     using System.Diagnostics;
     using System.Linq;
     using System.Threading.Tasks;
+    using XamExchange.Models;
 
-    public class CurrencyDataStore<T> : IDataStore<T> where T: RealmObject
+    public class CurrencyDataStore : IDataStore<RealmCurrency>
     {
-        public Task<bool> AddOrUpdateItemAsync(T item)
+        public Task<bool> AddOrUpdateItemAsync(RealmCurrency item)
         {
             var result = true;
             using (var realm = Realm.GetInstance())
@@ -39,7 +40,7 @@
         {
             using(var realm = await Realm.GetInstanceAsync())
             {
-                var item = realm.All<T>().First();
+                var item = realm.All<RealmCurrency>().First();
                 if (item == null) return false;
 
                 using (var transition = realm.BeginWrite())
@@ -51,13 +52,13 @@
             }
         }
 
-        public async Task<T> GetItemAsync(string id)
+        public async Task<RealmCurrency> GetItemAsync(string id)
         {
             using (var realm = await Realm.GetInstanceAsync())
-                return realm.All<T>().FirstOrDefault();
+                return realm.All<RealmCurrency>().FirstOrDefault();
         }
 
-        public async Task<IEnumerable<T>> GetItemsAsync(bool forceRefresh = false)
+        public async Task<IEnumerable<RealmCurrency>> GetItemsAsync(bool forceRefresh = false)
         {
             /*
             var rateList = new List<Rate>();
@@ -73,7 +74,7 @@
             }
             */
             using (var realm = await Realm.GetInstanceAsync())
-                return realm.All<T>();
+                return realm.All<RealmCurrency>();
 
         }
     }
