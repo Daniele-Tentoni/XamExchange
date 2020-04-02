@@ -1,16 +1,14 @@
-﻿using System;
-
-using XamExchange.Models;
-
-namespace XamExchange.ViewModels
+﻿namespace XamExchange.ViewModels
 {
+    using XamExchange.Models;
+
     public class ItemDetailViewModel : BaseViewModel
     {
-        public Currency Item { get; set; }
-        public ItemDetailViewModel(Currency item = null)
+        public CompleteCurrency Item { get; set; }
+        public ItemDetailViewModel(CompleteCurrency item = null)
         {
-            Title = item.Date;
-            Item = item;
+            this.Title = item.Name;
+            this.Item = item;
         }
     }
 }

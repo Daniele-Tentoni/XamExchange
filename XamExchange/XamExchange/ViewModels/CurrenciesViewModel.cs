@@ -1,6 +1,7 @@
 ﻿namespace XamExchange.ViewModels
 {
     using System;
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Diagnostics;
     using System.Threading.Tasks;
@@ -13,18 +14,18 @@
 
     public class CurrenciesViewModel : BaseViewModel
     {
-        public ObservableCollection<Rate> Currencies { get; set; }
+        public ObservableCollection<CompleteCurrency> Currencies { get; set; }
         public Command LoadCurrenciesCommand { get; set; }
 
         public CurrenciesViewModel()
         {
-            this.Title = "Browse";
-            this.Currencies = new ObservableCollection<Rate>();
+            this.Title = "Currencies";
+            this.Currencies = new ObservableCollection<CompleteCurrency>();
             this.LoadCurrenciesCommand = new Command(async () => await this.ExecuteLoadCurrenciesCommand());
 
-            MessagingCenter.Subscribe<NewItemPage, Rate>(this, "AddItem", async (obj, item) =>
+            MessagingCenter.Subscribe<NewItemPage, CompleteCurrency>(this, "AddItem", async (obj, item) =>
             {
-                var newItem = item as Rate;
+                var newItem = item as CompleteCurrency;
                 this.Currencies.Add(newItem);
                 _ = await this.DataStore.AddOrUpdateItemAsync(newItem);
             });
@@ -40,18 +41,25 @@
             try
             {
                 this.Currencies.Clear();
-                var fixerDataStore = new FixerDataStore();
-                var result = await fixerDataStore.GetLatestCurrencyExchange();
-                var latest = result;
-                if (!latest.IsSuccessful())
-                    Debug.WriteLine("Error.");
-                else
+                var fixer = new FixerDataStore();
+                var symbols = await fixer.GetAllCurrencySymbols();
+                var rates = await fixer.GetLatestCurrencyExchange();
+                var list = new List<CompleteCurrency>();
+                if (symbols.IsSuccessful() && rates.IsSuccessful())
                 {
-                    foreach (var item in ((Currency)latest).Rates)
+                    var fsymbols = (Symbols)symbols;
+                    var frates = (Currency)rates;
+                    foreach (var symbol in fsymbols.SymbolDictionary)
                     {
-                        this.Currencies.Add(new Rate { Name = item.Key, Value = (double)item.Value });
+                        list.Add(new CompleteCurrency
+                        {
+                            Code = symbol.Key,
+                            Name = symbol.Value,
+                            Rate = (double)frates.Rates[symbol.Key]
+                        });
                     }
                 }
+                this.Currencies = new ObservableCollection<CompleteCurrency>(list);
             }
             catch (Exception ex)
             {

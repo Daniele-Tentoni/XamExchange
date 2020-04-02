@@ -12,7 +12,7 @@
 
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public IDataStore<Rate> DataStore => DependencyService.Get<IDataStore<Rate>>();
+        public CurrencyDataStore DataStore => DependencyService.Get<CurrencyDataStore>();
 
         bool isBusy = false;
         public bool IsBusy
