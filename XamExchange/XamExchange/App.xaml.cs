@@ -1,6 +1,8 @@
 ﻿namespace XamExchange
 {
+    using System.Collections.Generic;
     using Xamarin.Forms;
+    using XamExchange.Models;
     using XamExchange.Services;
     using XamExchange.Views;
 

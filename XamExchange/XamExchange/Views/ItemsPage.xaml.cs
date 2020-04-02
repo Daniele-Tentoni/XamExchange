@@ -12,7 +12,7 @@
     [DesignTimeVisible(false)]
     public partial class ItemsPage : ContentPage
     {
-        CurrenciesViewModel viewModel;
+        readonly CurrenciesViewModel viewModel;
 
         public ItemsPage()
         {
@@ -23,20 +23,16 @@
 
         async void OnCurrencySelected(object sender, SelectedItemChangedEventArgs args)
         {
-            var item = args.SelectedItem as Currency;
-            if (item == null)
+            if (!(args.SelectedItem is CompleteCurrency item))
                 return;
 
-            // await Navigation.PushAsync(new ItemDetailPage(new ItemDetailViewModel(item)));
+            await this.Navigation.PushAsync(new ItemDetailPage(new ItemDetailViewModel(item)));
 
             // Manually deselect item.
             this.CurrencyListView.SelectedItem = null;
         }
 
-        async void AddItem_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PushModalAsync(new NavigationPage(new NewItemPage()));
-        }
+        async void AddItem_Clicked(object sender, EventArgs e) => await this.Navigation.PushModalAsync(new NavigationPage(new NewItemPage()));
 
         protected override void OnAppearing()
         {
