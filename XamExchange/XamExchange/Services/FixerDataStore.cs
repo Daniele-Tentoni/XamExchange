@@ -19,6 +19,10 @@
             };
         }
 
+        /// <summary>
+        /// Chiama Fixer per farsi restituire l'elenco di tutti gli ultimi tassi di conversione.
+        /// </summary>
+        /// <returns>Elenco degli ultimi tassi di conversione.</returns>
         public async Task<IFixerResponse> GetLatestCurrencyExchange()
         {
             var response = await this.client.GetAsync($"latest&access_key={this.accessKey}");
@@ -32,6 +36,10 @@
             return latest;
         }
 
+        /// <summary>
+        /// Chiama Fixer per farsi restituire l'elenco di tutti i possibili tassi di conversione.
+        /// </summary>
+        /// <returns>Elenco dei tassi di conversione.</returns>
         public async Task<IFixerResponse> GetAllCurrencySymbols()
         {
             var response = await this.client.GetAsync($"symbols&access_key={this.accessKey}");

@@ -46,7 +46,7 @@
 
             var aeds = ((Symbols)symbols).SymbolDictionary["AED"];
             var aedc = ((Currency)currencies).Rates["AED"];
-            var realmEntity = new RealmCurrency
+            var realmEntity = new CompleteCurrency
             {
                 Code = "AED",
                 Name = aeds,
@@ -60,7 +60,7 @@
         [Test] public void TestGetRealmCurrency()
         {
             var usdr = new CurrencyDataStore().GetItemAsync("AED").Result;
-            Assert.AreEqual("United Arab Emirates Dirham", usdr.Rate);
+            Assert.AreEqual("United Arab Emirates Dirham", usdr.Name);
         }
     }
 }

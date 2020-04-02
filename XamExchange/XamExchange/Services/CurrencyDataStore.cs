@@ -8,9 +8,9 @@
     using System.Threading.Tasks;
     using XamExchange.Models;
 
-    public class CurrencyDataStore : IDataStore<RealmCurrency>
+    public class CurrencyDataStore : IDataStore<CompleteCurrency>
     {
-        public Task<bool> AddOrUpdateItemAsync(RealmCurrency item)
+        public Task<bool> AddOrUpdateItemAsync(CompleteCurrency item)
         {
             var result = true;
             using (var realm = Realm.GetInstance())
@@ -18,7 +18,7 @@
             {
                 try
                 {
-                    realm.Add(item, true);
+                    realm.Add(new RealmCurrency(item), true);
                     transition.Commit();
                     result = true;
                 }
@@ -40,7 +40,7 @@
         {
             using(var realm = await Realm.GetInstanceAsync())
             {
-                var item = realm.All<RealmCurrency>().First();
+                var item = realm.All<RealmCurrency>().First(f => f.Code == id);
                 if (item == null) return false;
 
                 using (var transition = realm.BeginWrite())
@@ -52,29 +52,19 @@
             }
         }
 
-        public async Task<RealmCurrency> GetItemAsync(string id)
+        public async Task<CompleteCurrency> GetItemAsync(string id)
         {
             using (var realm = await Realm.GetInstanceAsync())
-                return realm.All<RealmCurrency>().FirstOrDefault();
+            {
+                var elem = realm.All<RealmCurrency>().FirstOrDefault(f => f.Code == id);
+                return new CompleteCurrency(elem);
+            }
         }
 
-        public async Task<IEnumerable<RealmCurrency>> GetItemsAsync(bool forceRefresh = false)
+        public async Task<IEnumerable<CompleteCurrency>> GetItemsAsync(bool forceRefresh = false)
         {
-            /*
-            var rateList = new List<Rate>();
-            if (forceRefresh)
-            {
-                var fixer = new FixerDataStore();
-                var latest = await fixer.GetLatestCurrencyExchange();
-                if (latest.Success)
-                    rateList = ((LatestCurrency)latest).Rates.RateList;
-                else {
-                    var error = (FixerResponseError)latest;
-                    Debug.WriteLine($"Error received from")
-            }
-            */
             using (var realm = await Realm.GetInstanceAsync())
-                return realm.All<RealmCurrency>();
+                return realm.All<RealmCurrency>().Select(s => new CompleteCurrency(s));
 
         }
     }
