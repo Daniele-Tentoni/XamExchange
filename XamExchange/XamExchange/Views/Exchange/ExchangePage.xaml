@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             Title="{Binding Title}"
+             mc:Ignorable="d"
+             x:Class="XamExchange.Views.Exchange.ExchangePage">
+    <ContentPage.Content>
+        <StackLayout Padding="10">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3"
+                       Text="Use this form to convert all currencies!"
+                       VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" />
+
+                <Entry Grid.Column="0" Grid.Row="1" 
+                       Text="{Binding FromText, Mode=TwoWay}"
+                       ReturnCommand="{Binding ExchangeCurrenciesCommand}"
+                       HorizontalOptions="FillAndExpand" />
+                <Entry Grid.Column="2" Grid.Row="1"
+                       Text="{Binding ToText, Mode=TwoWay}" 
+                       HorizontalOptions="FillAndExpand"/>
+                <Label Grid.Column="1" Grid.Row="1" 
+                       Text="=" 
+                       VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"/>
+
+                <Picker Grid.Column="0" Grid.Row="2"
+                        SelectedIndex="{Binding FromSelected}" ItemsSource="{Binding PickerCurrencies}" />
+
+                <Picker Grid.Column="2" Grid.Row="2"
+                        SelectedIndex="{Binding ToSelected}" ItemsSource="{Binding PickerCurrencies}" />
+
+
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
