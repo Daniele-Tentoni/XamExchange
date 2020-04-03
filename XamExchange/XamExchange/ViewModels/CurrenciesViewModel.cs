@@ -44,14 +44,13 @@
                 var fixer = new FixerDataStore();
                 var symbols = await fixer.GetAllCurrencySymbols();
                 var rates = await fixer.GetLatestCurrencyExchange();
-                var list = new List<CompleteCurrency>();
                 if (symbols.IsSuccessful() && rates.IsSuccessful())
                 {
                     var fsymbols = (Symbols)symbols;
                     var frates = (Currency)rates;
                     foreach (var symbol in fsymbols.SymbolDictionary)
                     {
-                        list.Add(new CompleteCurrency
+                        this.Currencies.Add(new CompleteCurrency
                         {
                             Code = symbol.Key,
                             Name = symbol.Value,
@@ -59,7 +58,6 @@
                         });
                     }
                 }
-                this.Currencies = new ObservableCollection<CompleteCurrency>(list);
             }
             catch (Exception ex)
             {

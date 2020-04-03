@@ -29,7 +29,7 @@
                 switch (id)
                 {
                     case (int)MenuItemType.Exchange:
-                        this.MenuPages.Add(id, new NavigationPage(new ItemsPage()));
+                        this.MenuPages.Add(id, new NavigationPage(new Exchange.ExchangePage()));
                         break;
                     case (int)MenuItemType.Currencies:
                         this.MenuPages.Add(id, new NavigationPage(new ItemsPage()));

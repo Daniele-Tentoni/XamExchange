@@ -26,18 +26,29 @@
                 <DataTemplate>
                     <ViewCell>
                         <StackLayout Padding="10">
-                            <Label Text="{Binding Code}" 
-                                d:Text="{Binding .}"
-                                LineBreakMode="NoWrap" 
-                                FontSize="16" />
-                            <Label Text="{Binding Name}" 
-                                d:Text="Item descripton"
-                                LineBreakMode="NoWrap"
-                                FontSize="13" />
-                            <Label Text="{Binding Rate}" 
-                                d:Text="Item descripton"
-                                LineBreakMode="NoWrap"
-                                FontSize="13" />
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="2*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Label Grid.Row="0" Grid.Column="0"
+                                       Text="{Binding Code, StringFormat='{0} = '}" d:Text="{Binding .}"
+                                       LineBreakMode="NoWrap" 
+                                       FontSize="Medium" />
+                                <Label Grid.Row="0" Grid.Column="1"
+                                       Text="{Binding Rate}" d:Text="Item descripton"
+                                       LineBreakMode="NoWrap"
+                                       FontSize="Medium" />
+                                <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                                       Text="{Binding Name}" d:Text="Item descripton"
+                                       LineBreakMode="NoWrap"
+                                       FontSize="Large" />
+                            </Grid>
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>

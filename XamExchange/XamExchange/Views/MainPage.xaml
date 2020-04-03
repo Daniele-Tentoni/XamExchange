@@ -5,6 +5,7 @@
             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
             mc:Ignorable="d"
             xmlns:views="clr-namespace:XamExchange.Views"
+                  xmlns:exchange="clr-namespace:XamExchange.Views.Exchange"
             x:Class="XamExchange.Views.MainPage">
 
     <MasterDetailPage.Master>
@@ -19,9 +20,9 @@
                 </OnPlatform>
             </NavigationPage.Icon>
             <x:Arguments>
-                <views:ItemsPage />
+                <exchange:ExchangePage />
             </x:Arguments>
         </NavigationPage>
     </MasterDetailPage.Detail>
-    
+
 </MasterDetailPage>
