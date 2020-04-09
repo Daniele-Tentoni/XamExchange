@@ -8,11 +8,21 @@
 
     <Application.Resources>
         <ResourceDictionary>
-            <!--Global Styles-->
-            <Color x:Key="NavigationPrimary">#2196F3</Color>
+            <!-- Main colors -->
+            <Color x:Key="PrimaryColor">#1a237e</Color>
+            <Color x:Key="PrimaryLightColor">#534bae</Color>
+            <Color x:Key="PrimaryDarkColor">#000051</Color>
+            <Color x:Key="SecondaryColor">#263238</Color>
+            <Color x:Key="SecondaryLightColor">#4f5b62</Color>
+            <Color x:Key="SecondaryDarkColor">#000a12</Color>
+            <Color x:Key="TextColorOnPrimary">#ffffff</Color>
+            <Color x:Key="TextColorOnSecondary">#ffffff</Color>
+
+            <x:String x:Key="AppName">XamExchange</x:String>
+
             <Style TargetType="NavigationPage">
-                <Setter Property="BarBackgroundColor" Value="{StaticResource NavigationPrimary}" />
-                <Setter Property="BarTextColor" Value="White" />
+                <Setter Property="BarBackgroundColor" Value="{StaticResource PrimaryColor}" />
+                <Setter Property="BarTextColor" Value="{StaticResource TextColorOnPrimary}" />
             </Style>
         </ResourceDictionary>
     </Application.Resources>
