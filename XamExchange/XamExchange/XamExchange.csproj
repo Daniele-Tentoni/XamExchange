@@ -11,16 +11,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FixerSharp" Version="1.2.2" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="Realm" Version="4.3.0" />
-    <PackageReference Include="Xamarin.Forms" Version="4.3.0.908675" />  
+    <PackageReference Include="Xamarin.Forms" Version="4.5.0.530" />  
     <PackageReference Include="Xamarin.Essentials" Version="1.5.2" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Update="Views\Exchange\ExchangePage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
+    <PackageReference Include="Xamarin.Forms.Visual.Material" Version="4.5.0.530" />
   </ItemGroup>
 </Project>

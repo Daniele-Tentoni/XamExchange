@@ -5,7 +5,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              Title="{Binding Title}"
              mc:Ignorable="d"
-             x:Class="XamExchange.Views.Exchange.ExchangePage">
+             x:Class="XamExchange.Views.Exchange.ExchangePage"
+             Visual="Material">
     <ContentPage.Content>
         <StackLayout Padding="10">
             <Grid>
