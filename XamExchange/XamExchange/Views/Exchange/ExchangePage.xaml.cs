@@ -22,5 +22,10 @@
             if (this.viewModel.Currencies.Count == 0)
                 this.viewModel.LoadCurrenciesCommand.Execute(null);
         }
+
+        void Entry_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            this.viewModel.ExchangeCurrenciesCommand.Execute(null);
+        }
     }
 }

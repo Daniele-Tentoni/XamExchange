@@ -28,21 +28,22 @@
 
                 <Entry Grid.Column="0" Grid.Row="1" 
                        Text="{Binding FromText, Mode=TwoWay}"
-                       ReturnCommand="{Binding ExchangeCurrenciesCommand}"
+                       TextChanged="Entry_TextChanged"
                        HorizontalOptions="FillAndExpand" />
-                <Entry Grid.Column="2" Grid.Row="1"
-                       Text="{Binding ToText, Mode=TwoWay}" 
-                       HorizontalOptions="FillAndExpand"/>
                 <Label Grid.Column="1" Grid.Row="1" 
                        Text="=" 
                        VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"/>
+                <Entry Grid.Column="2" Grid.Row="1"
+                       Text="{Binding ToText, Mode=TwoWay}" 
+                       HorizontalOptions="FillAndExpand"/>
 
                 <Picker Grid.Column="0" Grid.Row="2"
-                        SelectedIndex="{Binding FromSelected}" ItemsSource="{Binding PickerCurrencies}" />
+                        SelectedIndex="{Binding FromSelected}"
+                        ItemsSource="{Binding PickerCurrencies, Mode=TwoWay}" />
 
                 <Picker Grid.Column="2" Grid.Row="2"
-                        SelectedIndex="{Binding ToSelected}" ItemsSource="{Binding PickerCurrencies}" />
-
+                        SelectedIndex="{Binding ToSelected}"
+                        ItemsSource="{Binding PickerCurrencies, Mode=TwoWay}" />
 
             </Grid>
         </StackLayout>
