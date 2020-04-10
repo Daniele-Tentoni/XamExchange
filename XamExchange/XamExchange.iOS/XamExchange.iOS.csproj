@@ -141,4 +141,10 @@
       <Name>XamExchange</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\xam_exchange_log.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\dan_ten_logo.png" />
+  </ItemGroup>
 </Project>

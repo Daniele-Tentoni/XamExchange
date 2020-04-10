@@ -1,0 +1,223 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage
+    x:Class="XamExchange.Views.About.AboutTabPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <!--  Pages can be added as references or inline  -->
+    <ContentPage Title="XamExchange">
+        <ScrollView>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <StackLayout
+                    Grid.Row="0"
+                    BackgroundColor="{StaticResource PrimaryLightColor}"
+                    HorizontalOptions="Center"
+                    VerticalOptions="FillAndExpand">
+                    <ContentView Padding="0,40,0,40" VerticalOptions="FillAndExpand">
+                        <Image
+                            HeightRequest="64"
+                            HorizontalOptions="FillAndExpand"
+                            Source="xam_exchange_log.png"
+                            VerticalOptions="Center" />
+                    </ContentView>
+                </StackLayout>
+                <StackLayout
+                    Grid.Row="1"
+                    Padding="16,40,16,40"
+                    Orientation="Vertical"
+                    Spacing="10">
+                    <Label FontSize="22">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <FormattedString.Spans>
+                                    <Span
+                                        FontAttributes="Bold"
+                                        FontSize="22"
+                                        Text="{StaticResource AppName}" />
+                                    <Span Text=" " />
+                                    <Span ForegroundColor="{StaticResource TextColorOnPrimary}" Text="1.0" />
+                                </FormattedString.Spans>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Label>
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <FormattedString.Spans>
+                                    <Span Text="This app let you convert a value from a" />
+                                    <Span Text=" " />
+                                    <Span FontAttributes="Bold" Text="currency" />
+                                    <Span Text=" to " />
+                                    <Span FontAttributes="Bold" Text="another one" />
+                                    <Span Text="." />
+                                </FormattedString.Spans>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Label>
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <FormattedString.Spans>
+                                    <Span Text="Download the latest rateos from" />
+                                    <Span Text=" " />
+                                    <Span FontAttributes="Bold" Text="Fixer.io" />
+                                    <Span Text=", the best site here with the fastest Apis." />
+                                </FormattedString.Spans>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Button
+                        Margin="0,10,0,0"
+                        BackgroundColor="{StaticResource PrimaryColor}"
+                        Command="{Binding OpenWebCommand}"
+                        CommandParameter="https://fixer.io"
+                        Text="Learn more"
+                        TextColor="{StaticResource TextColorOnPrimary}" />
+                </StackLayout>
+            </Grid>
+        </ScrollView>
+    </ContentPage>
+    <ContentPage Title="Xamarin">
+        <ScrollView>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <StackLayout
+                    Grid.Row="0"
+                    BackgroundColor="{StaticResource PrimaryLightColor}"
+                    HorizontalOptions="Fill"
+                    VerticalOptions="FillAndExpand">
+                    <ContentView Padding="0,40,0,40" VerticalOptions="FillAndExpand">
+                        <Image
+                            HeightRequest="64"
+                            HorizontalOptions="FillAndExpand"
+                            Source="xamarin_logo.png"
+                            VerticalOptions="Center" />
+                    </ContentView>
+                </StackLayout>
+                <StackLayout
+                    Grid.Row="1"
+                    Padding="16,40,16,40"
+                    Orientation="Vertical"
+                    Spacing="10">
+                    <Label FontSize="22">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <FormattedString.Spans>
+                                    <Span
+                                        FontAttributes="Bold"
+                                        FontSize="22"
+                                        Text="Xamarin" />
+                                    <Span Text=" " />
+                                    <Span ForegroundColor="{StaticResource TextColorOnPrimary}" Text="1.0" />
+                                </FormattedString.Spans>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Label>
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <FormattedString.Spans>
+                                    <Span Text="This app is written in C# and native APIs using the" />
+                                    <Span Text=" " />
+                                    <Span FontAttributes="Bold" Text="Xamarin Platform" />
+                                    <Span Text="." />
+                                </FormattedString.Spans>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Label>
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <FormattedString.Spans>
+                                    <Span Text="It shares code with its" />
+                                    <Span Text=" " />
+                                    <Span FontAttributes="Bold" Text="iOS, Android, and Windows" />
+                                    <Span Text=" " />
+                                    <Span Text="versions." />
+                                </FormattedString.Spans>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Button
+                        Margin="0,10,0,0"
+                        BackgroundColor="{StaticResource PrimaryColor}"
+                        Command="{Binding OpenWebCommand}"
+                        CommandParameter="https://xamarin.com"
+                        Text="Learn more"
+                        TextColor="{StaticResource TextColorOnPrimary}" />
+                </StackLayout>
+            </Grid>
+        </ScrollView>
+    </ContentPage>
+    <ContentPage Title="Who am I?">
+        <ScrollView>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <StackLayout
+                    Grid.Row="0"
+                    BackgroundColor="{StaticResource PrimaryLightColor}"
+                    HorizontalOptions="Center"
+                    VerticalOptions="FillAndExpand">
+                    <ContentView Padding="0,40,0,40" VerticalOptions="FillAndExpand">
+                        <Image
+                            HeightRequest="64"
+                            HorizontalOptions="FillAndExpand"
+                            Source="dan_ten_logo.png"
+                            VerticalOptions="Center" />
+                    </ContentView>
+                </StackLayout>
+                <StackLayout
+                    Grid.Row="1"
+                    Padding="16,40,16,40"
+                    Orientation="Vertical"
+                    Spacing="10">
+                    <Label FontSize="22">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <FormattedString.Spans>
+                                    <Span
+                                        FontAttributes="Bold"
+                                        FontSize="22"
+                                        Text="Daniele Tentoni" />
+                                    <Span Text=" " />
+                                    <Span ForegroundColor="{StaticResource TextColorOnPrimary}" Text="1.0" />
+                                </FormattedString.Spans>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Label>
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <FormattedString.Spans>
+                                    <Span Text="Hi! I'm" />
+                                    <Span Text=" " />
+                                    <Span FontAttributes="Bold" Text="Daniele Tentoni" />
+                                    <Span Text=" and I'm learning to develop mobile applications." />
+                                </FormattedString.Spans>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Button
+                        Margin="0,10,0,0"
+                        BackgroundColor="{StaticResource PrimaryColor}"
+                        Command="{Binding OpenWebCommand}"
+                        CommandParameter="https://github.com/Daniele-Tentoni"
+                        Text="See my repos"
+                        TextColor="{StaticResource TextColorOnPrimary}" />
+                </StackLayout>
+            </Grid>
+        </ScrollView>
+    </ContentPage>
+</TabbedPage>
