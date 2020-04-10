@@ -5,12 +5,22 @@
     using System.Collections.Specialized;
     using System.Diagnostics;
     using System.Threading.Tasks;
+    using Xamarin.Essentials;
     using Xamarin.Forms;
     using XamExchange.Models;
     using XamExchange.Services;
 
     public class ExchangeViewModel : BaseViewModel
     {
+        public DateTime LastUpdate
+        {
+            get => Preferences.Get("last_update", DateTime.Now);
+            set {
+                Preferences.Set("last_update", value);
+                this.OnPropertyChanged(nameof(this.LastUpdate));
+            }
+        }
+
         public ObservableCollection<CompleteCurrency> Currencies { get; set; }
 
         public ObservableCollection<string> PickerCurrencies { get; set; }
@@ -85,6 +95,7 @@
                 {
                     var fsymbols = (Symbols)symbols;
                     var frates = (Currency)rates;
+                    this.LastUpdate = DateTimeOffset.FromUnixTimeSeconds(frates.Timestamp).LocalDateTime;
                     foreach (var symbol in fsymbols.SymbolDictionary)
                     {
                         this.Currencies.Add(new CompleteCurrency

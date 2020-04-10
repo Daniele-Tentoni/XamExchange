@@ -22,13 +22,16 @@
         /// <summary>
         /// Chiama Fixer per farsi restituire l'elenco di tutti gli ultimi tassi di conversione.
         /// </summary>
-        /// <returns>Elenco degli ultimi tassi di conversione.</returns>
+        /// <returns>
+        /// Elenco degli ultimi tassi di conversione.
+        /// Viene provvisto anche la data di aggiornamento in formato timestamp.
+        /// </returns>
         public async Task<IFixerResponse> GetLatestCurrencyExchange()
         {
             var response = await this.client.GetAsync($"latest&access_key={this.accessKey}");
             var contentString = response.Content.ReadAsStringAsync();
-            contentString.Wait();
             IFixerResponse latest;
+            contentString.Wait();
             if (response.IsSuccessStatusCode)
                 latest = JsonConvert.DeserializeObject<Currency>(contentString.Result);
             else
@@ -39,7 +42,7 @@
         /// <summary>
         /// Chiama Fixer per farsi restituire l'elenco di tutti i possibili tassi di conversione.
         /// </summary>
-        /// <returns>Elenco dei tassi di conversione.</returns>
+        /// <returns>Elenco dei simboli e nomi delle valute convertibili.</returns>
         public async Task<IFixerResponse> GetAllCurrencySymbols()
         {
             var response = await this.client.GetAsync($"symbols&access_key={this.accessKey}");

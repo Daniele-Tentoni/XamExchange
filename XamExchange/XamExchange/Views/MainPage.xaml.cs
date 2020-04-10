@@ -6,6 +6,8 @@
     using Xamarin.Forms;
 
     using XamExchange.Models;
+    using XamExchange.Views.About;
+    using XamExchange.Views.Exchange;
 
     // Learn more about making custom code visible in the Xamarin.Forms previewer
     // by visiting https://aka.ms/xamarinforms-previewer
@@ -29,13 +31,13 @@
                 switch (id)
                 {
                     case (int)MenuItemType.Exchange:
-                        this.MenuPages.Add(id, new NavigationPage(new Exchange.ExchangePage()));
+                        this.MenuPages.Add(id, new NavigationPage(new ExchangePage()));
                         break;
                     case (int)MenuItemType.Currencies:
                         this.MenuPages.Add(id, new NavigationPage(new ItemsPage()));
                         break;
                     case (int)MenuItemType.About:
-                        this.MenuPages.Add(id, new NavigationPage(new AboutPage()));
+                        this.MenuPages.Add(id, new NavigationPage(new AboutTabPage()));
                         break;
                 }
             }

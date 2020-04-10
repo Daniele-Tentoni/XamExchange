@@ -1,20 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-
-namespace XamExchange.Views.About
+﻿namespace XamExchange.Views.About
 {
+    using Xamarin.Forms;
+    using Xamarin.Forms.Xaml;
+    using XamExchange.ViewModels;
+
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AboutTabPage : TabbedPage
     {
         public AboutTabPage()
         {
-            InitializeComponent();
+            this.InitializeComponent();
+            this.BindingContext = new AboutViewModel();
         }
     }
 }

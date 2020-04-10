@@ -15,6 +15,9 @@
         public CurrencyDataStore DataStore => DependencyService.Get<CurrencyDataStore>();
 
         bool isBusy = false;
+        /// <summary>
+        /// Definisce se l'applicazione è intenta nell'eseguire un compito oppure no.
+        /// </summary>
         public bool IsBusy
         {
             get { return this.isBusy; }
@@ -22,12 +25,26 @@
         }
 
         string title = string.Empty;
+        /// <summary>
+        /// Definisce il titolo della finestra.
+        /// </summary>
         public string Title
         {
             get { return this.title; }
             set { _ = this.SetProperty(ref this.title, value); }
         }
 
+        /// <summary>
+        /// Metodo da invocare quando si vuole aggiornare una proprietà legata al ViewModel.
+        /// Permette di far rilevare alla view l'aggiornamento della proprietà ed aggiornarsi
+        /// automaticamente senza ulteriori interventi, grazie al Data Binding.
+        /// </summary>
+        /// <typeparam name="T">Tipo della proprietà da aggiornare.</typeparam>
+        /// <param name="backingStore">Store della proprietà.</param>
+        /// <param name="value">Valore da aggiornare.</param>
+        /// <param name="propertyName">Nome della proprietà (rilevabile).</param>
+        /// <param name="onChanged">Azione da eseguire al termine.</param>
+        /// <returns>True se l'aggiornamento è stato eseguito, false altrimenti.</returns>
         protected bool SetProperty<T>(ref T backingStore, T value,
             [CallerMemberName]string propertyName = "",
             Action onChanged = null)

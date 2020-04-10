@@ -12,10 +12,10 @@
     {
         public Task<bool> AddOrUpdateItemAsync(CompleteCurrency item)
         {
-            var result = true;
             using (var realm = Realm.GetInstance())
             using (var transition = realm.BeginWrite())
             {
+                bool result;
                 try
                 {
                     realm.Add(new RealmCurrency(item), true);
@@ -27,10 +27,6 @@
                     Debug.WriteLine($"Exception thrown by {nameof(realm)}: {e.Message}");
                     transition.Rollback();
                     result = false;
-                }
-                finally
-                {
-                    Debug.WriteLine($"Add Rate {item}");
                 }
                 return Task.FromResult(result);
             }
@@ -65,7 +61,6 @@
         {
             using (var realm = await Realm.GetInstanceAsync())
                 return realm.All<RealmCurrency>().Select(s => new CompleteCurrency(s));
-
         }
     }
 }
