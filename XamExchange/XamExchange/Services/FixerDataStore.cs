@@ -1,5 +1,6 @@
 ﻿namespace XamExchange.Services
 {
+    using System;
     using Newtonsoft.Json;
     using RestSharp;
     using XamExchange.Models.FixerModels;
@@ -24,21 +25,11 @@
         /// </returns>
         public IFixerResponse GetLatestCurrencyExchange()
         {
-            var request = this.DecorateRequest("latest");
+            var request = this.CreateRequest("latest");
             var response = this.client.Execute<Currency>(request);
             if (response.IsSuccessful)
                 return response.Data;
             return JsonConvert.DeserializeObject<FixerResponseError>(response.Content);
-            /*var response = await this.client.GetAsync($"latest&access_key={this.accessKey}");
-            var contentString = response.Content.ReadAsStringAsync();
-            IFixerResponse latest;
-            contentString.Wait();
-            if (response.IsSuccessStatusCode)
-                latest = JsonConvert.DeserializeObject<Currency>(contentString.Result);
-            else
-                latest = JsonConvert.DeserializeObject<FixerResponseError>(contentString.Result);
-            return latest;
-            */
         }
 
         /// <summary>
@@ -47,16 +38,29 @@
         /// <returns>Elenco dei simboli e nomi delle valute convertibili.</returns>
         public IFixerResponse GetAllCurrencySymbols()
         {
-            var request = this.DecorateRequest("symbols");
+            var request = this.CreateRequest("symbols");
             var response = this.client.Execute<AllSymbols>(request);
             if (response.IsSuccessful)
                 return response.Data;
             return JsonConvert.DeserializeObject<FixerResponseError>(response.Content);
-            /*var response = await this.client.GetAsync($"symbols&access_key={this.accessKey}");
-            var contentString = response.Content.ReadAsStringAsync();
-            contentString.Wait();
-            var symbols = JsonConvert.DeserializeObject<Symbols>(contentString.Result);
-            return symbols;*/
+        }
+
+        /// <summary>
+        /// Retrieve information about how currencies fluctuate on a day-to-day basis.
+        /// Not available with a free plan, sadly.
+        /// </summary>
+        /// <param name="from">From date.</param>
+        /// <param name="to">To date.</param>
+        /// <returns>List of all fluctuation.</returns>
+        public IFixerResponse GetFluctuationFromDateToDate(DateTime from, DateTime to)
+        {
+            var request = this.CreateRequest("fluctuation");
+            request.AddParameter("start_date", from.ToShortDateString());
+            request.AddParameter("end_date", to.ToShortDateString());
+            var response = this.client.Execute<Fluctuations>(request);
+            if (response.IsSuccessful)
+                return response.Data;
+            return JsonConvert.DeserializeObject<FixerResponseError>(response.Content);
         }
 
         /// <summary>
@@ -64,7 +68,7 @@
         /// </summary>
         /// <param name="root">Function to call on Fixer.io</param>
         /// <returns>Base request to Fixer.io</returns>
-        private RestRequest DecorateRequest(string function)
+        private RestRequest CreateRequest(string function)
         {
             var request = new RestRequest(function, Method.GET, DataFormat.Json);
             request.AddParameter("access_key", ACCESS_KEY);
