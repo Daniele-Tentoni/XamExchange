@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-
-using XamExchange.Models;
+using XamExchange.Models.FixerModels;
 
 namespace XamExchange.Views
 {

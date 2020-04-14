@@ -8,6 +8,7 @@
     using Xamarin.Forms;
 
     using XamExchange.Models;
+    using XamExchange.Models.FixerModels;
     using XamExchange.Services;
     using XamExchange.Views;
 
@@ -41,13 +42,13 @@
             {
                 this.Currencies.Clear();
                 var fixer = new FixerDataStore();
-                var symbols = await fixer.GetAllCurrencySymbols();
-                var rates = await fixer.GetLatestCurrencyExchange();
+                var symbols =  fixer.GetAllCurrencySymbols();
+                var rates =  fixer.GetLatestCurrencyExchange();
                 if (symbols.IsSuccessful() && rates.IsSuccessful())
                 {
-                    var fsymbols = (Symbols)symbols;
+                    var fsymbols = (AllSymbols)symbols;
                     var frates = (Currency)rates;
-                    foreach (var symbol in fsymbols.SymbolDictionary)
+                    foreach (var symbol in fsymbols.Symbols)
                     {
                         this.Currencies.Add(new CompleteCurrency
                         {

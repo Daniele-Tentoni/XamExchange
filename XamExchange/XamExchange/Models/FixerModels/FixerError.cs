@@ -1,4 +1,4 @@
-﻿namespace XamExchange.Models
+﻿namespace XamExchange.Models.FixerModels
 {
     using Newtonsoft.Json;
 

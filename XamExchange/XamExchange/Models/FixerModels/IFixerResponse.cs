@@ -1,9 +1,5 @@
-﻿namespace XamExchange.Models
+﻿namespace XamExchange.Models.FixerModels
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Text;
-
     public interface IFixerResponse
     {
         bool IsSuccessful();

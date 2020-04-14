@@ -2,6 +2,7 @@
 {
     using NUnit.Framework;
     using XamExchange.Models;
+    using XamExchange.Models.FixerModels;
     using XamExchange.Services;
 
     class FixerDataStoreTests
@@ -17,7 +18,7 @@
         [Test]
         public void TestLatestCurrency()
         {
-            var result = this.fixerDataStore.GetLatestCurrencyExchange().Result;
+            var result = this.fixerDataStore.GetLatestCurrencyExchange();
             Assert.IsTrue(result.IsSuccessful());
             var successful = (Currency)result;
             Assert.IsNotNull(successful.Base);
@@ -28,23 +29,23 @@
 
         [Test] public void TestGetAllCurrencySymbols()
         {
-            var result = this.fixerDataStore.GetAllCurrencySymbols().Result;
+            var result = this.fixerDataStore.GetAllCurrencySymbols();
             Assert.IsTrue(result.IsSuccessful());
-            var success = result as Symbols;
-            Assert.IsNotNull(success.SymbolDictionary);
-            var usd = success.SymbolDictionary["USD"];
+            var success = result as AllSymbols;
+            Assert.IsNotNull(success.Symbols);
+            var usd = success.Symbols["USD"];
             Assert.AreEqual("United States Dollar", usd);
         }
 
         [Test] public void TestAddRealmCurrency()
         {
-            var symbols = this.fixerDataStore.GetAllCurrencySymbols().Result;
+            var symbols = this.fixerDataStore.GetAllCurrencySymbols();
             Assert.IsTrue(symbols.IsSuccessful());
 
-            var currencies = this.fixerDataStore.GetLatestCurrencyExchange().Result;
+            var currencies = this.fixerDataStore.GetLatestCurrencyExchange();
             Assert.IsTrue(currencies.IsSuccessful());
 
-            var aeds = ((Symbols)symbols).SymbolDictionary["AED"];
+            var aeds = ((AllSymbols)symbols).Symbols["AED"];
             var aedc = ((Currency)currencies).Rates["AED"];
             var realmEntity = new CompleteCurrency
             {

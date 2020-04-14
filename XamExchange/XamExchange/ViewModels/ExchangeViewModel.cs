@@ -8,6 +8,7 @@
     using Xamarin.Essentials;
     using Xamarin.Forms;
     using XamExchange.Models;
+    using XamExchange.Models.FixerModels;
     using XamExchange.Services;
 
     public class ExchangeViewModel : BaseViewModel
@@ -78,7 +79,7 @@
             this.ExchangeCurrenciesCommand = new Command(async () => await this.ExecuteExchangeCurrenciesCommand());
         }
 
-        async Task ExecuteLoadCurrenciesCommand()
+        private async Task ExecuteLoadCurrenciesCommand()
         {
             if (this.IsBusy)
                 return;
@@ -89,14 +90,14 @@
             {
                 this.Currencies.Clear();
                 var fixer = new FixerDataStore();
-                var symbols = await fixer.GetAllCurrencySymbols();
-                var rates = await fixer.GetLatestCurrencyExchange();
+                var symbols =  fixer.GetAllCurrencySymbols();
+                var rates =  fixer.GetLatestCurrencyExchange();
                 if (symbols.IsSuccessful() && rates.IsSuccessful())
                 {
-                    var fsymbols = (Symbols)symbols;
+                    var fsymbols = (AllSymbols)symbols;
                     var frates = (Currency)rates;
                     this.LastUpdate = DateTimeOffset.FromUnixTimeSeconds(frates.Timestamp).LocalDateTime;
-                    foreach (var symbol in fsymbols.SymbolDictionary)
+                    foreach (var symbol in fsymbols.Symbols)
                     {
                         this.Currencies.Add(new CompleteCurrency
                         {

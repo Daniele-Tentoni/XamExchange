@@ -1,15 +1,15 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace XamExchange.Models
+namespace XamExchange.Models.FixerModels
 {
-    public class Symbols: IFixerResponse
+    public class AllSymbols: IFixerResponse
     {
         [JsonProperty(PropertyName = "success")]
         public bool Success { get; set; }
 
         [JsonProperty(PropertyName = "symbols")]
-        public IDictionary<string, string> SymbolDictionary { get; set; }
+        public Dictionary<string, string> Symbols { get; set; }
 
         public bool IsSuccessful() => this.Success;
     }
