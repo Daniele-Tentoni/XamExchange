@@ -1,5 +1,6 @@
 ﻿namespace XamExchangeTests.FixerTests
 {
+    using System;
     using NUnit.Framework;
     using XamExchange.Models;
     using XamExchange.Models.FixerModels;
@@ -35,6 +36,14 @@
             Assert.IsNotNull(success.Symbols);
             var usd = success.Symbols["USD"];
             Assert.AreEqual("United States Dollar", usd);
+        }
+
+        [Test] public void TestFluctuationEndpoint()
+        {
+            var from = DateTime.Now.AddDays(-1);
+            var to = DateTime.Now;
+            var result = this.fixerDataStore.GetFluctuationFromDateToDate(from, to);
+            Assert.IsFalse(result.IsSuccessful());
         }
 
         [Test] public void TestAddRealmCurrency()

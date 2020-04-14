@@ -67,7 +67,7 @@
                 {
                     foreach (CompleteCurrency item in e.NewItems)
                     {
-                        this.PickerCurrencies.Add($"{item.Code} {item.Name}");
+                        this.PickerCurrencies.Add($"{item.Code}");
                     }
                 }
                 else if (e.Action == NotifyCollectionChangedAction.Reset)

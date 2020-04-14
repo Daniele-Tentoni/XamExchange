@@ -15,9 +15,9 @@
         <StackLayout Padding="10">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
@@ -25,54 +25,72 @@
 
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="3*" />
                 </Grid.ColumnDefinitions>
 
                 <Label
                     Grid.Row="0"
                     Grid.Column="0"
-                    Grid.ColumnSpan="3"
+                    Grid.ColumnSpan="2"
                     HorizontalOptions="CenterAndExpand"
+                    FontSize="Medium"
                     Text="Use this form to convert all currencies!"
                     VerticalOptions="CenterAndExpand" />
 
                 <Entry
                     Grid.Row="1"
-                    Grid.Column="0"
+                    Grid.Column="1"
                     HorizontalOptions="FillAndExpand"
                     Placeholder="From"
                     Text="{Binding FromText, Mode=TwoWay}"
                     TextChanged="Entry_TextChanged" />
-                <Label
-                    Grid.Row="1"
-                    Grid.Column="1"
-                    HorizontalOptions="CenterAndExpand"
-                    Text="=&gt;"
-                    VerticalOptions="CenterAndExpand" />
-                <Entry
-                    Grid.Row="1"
-                    Grid.Column="2"
-                    HorizontalOptions="FillAndExpand"
-                    Placeholder="To"
-                    Text="{Binding ToText, Mode=TwoWay}" />
-
                 <Picker
-                    Grid.Row="2"
+                    Grid.Row="1"
                     Grid.Column="0"
+                    VerticalOptions="End"
                     ItemsSource="{Binding PickerCurrencies, Mode=TwoWay}"
                     SelectedIndex="{Binding FromSelected}" />
 
-                <Picker
+                <Label
                     Grid.Row="2"
-                    Grid.Column="2"
+                    Grid.Column="0" Grid.ColumnSpan="2"
+                    HorizontalOptions="CenterAndExpand"
+                    Text="Convert to"
+                    FontSize="Large"
+                    VerticalOptions="CenterAndExpand" />
+
+                <Entry
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    HorizontalOptions="FillAndExpand"
+                    Placeholder="To"
+                    Text="{Binding ToText, Mode=TwoWay}" />
+                <Picker
+                    Grid.Row="3"
+                    Grid.Column="0"
+                    VerticalOptions="End"
                     ItemsSource="{Binding PickerCurrencies, Mode=TwoWay}"
                     SelectedIndex="{Binding ToSelected}" />
 
                 <Label
-                    Grid.Row="3"
+                    Grid.Row="4"
                     Grid.Column="0"
-                    Grid.ColumnSpan="3">
+                    Grid.ColumnSpan="2">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <FormattedString.Spans>
+                                <Span Text="Last update made at" />
+                                <Span Text=" " />
+                                <Span FontAttributes="Bold" Text="{Binding LastUpdate}" />
+                            </FormattedString.Spans>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label
+                    Grid.Row="5"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    FontSize="Medium">
                     <Label.FormattedText>
                         <FormattedString>
                             <FormattedString.Spans>
@@ -82,29 +100,33 @@
                     </Label.FormattedText>
                 </Label>
                 <Label
-                    Grid.Row="4"
+                    Grid.Row="6"
                     Grid.Column="0"
-                    Grid.ColumnSpan="3">
+                    Grid.ColumnSpan="2">
                     <Label.FormattedText>
                         <FormattedString>
                             <FormattedString.Spans>
-                                <Span Text="Select a currency from the first picker to convert to currency selected in the second picker." />
+                                <Span Text="Since I've only a Fixer.io free plan, I cannot access to conversion rates other then from € to other currencies." />
                                 <Span FontAttributes="Bold" Text=" " />
-                                <Span Text="You can refresh rates from the button on the right of navigation bar." />
+                                <Span Text="For this reason, at conversion input, I first convert the value in €, and only after that I convert it to your currency." />
+                                <Span Text="This may cause a " />
+                                <Span FontAttributes="Bold" Text="decimal conversion error" />
+                                <Span Text=". But don't worry about that. If you buy the " />
+                                <Span FontAttributes="Bold" Text="Premium App" />
+                                <Span Text=" in the store. That app is not available now, but maybe in the future." />
                             </FormattedString.Spans>
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
                 <Label
-                    Grid.Row="5"
+                    Grid.Row="7"
                     Grid.Column="0"
-                    Grid.ColumnSpan="3">
+                    Grid.ColumnSpan="2">
                     <Label.FormattedText>
                         <FormattedString>
                             <FormattedString.Spans>
-                                <Span Text="Last update made at" />
-                                <Span Text=" " />
-                                <Span FontAttributes="Bold" Text="{Binding LastUpdate}" />
+                                <Span Text="Thanks for your " />
+                                <Span FontAttributes="Bold" Text="patience!" />
                             </FormattedString.Spans>
                         </FormattedString>
                     </Label.FormattedText>
