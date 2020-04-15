@@ -1,6 +1,7 @@
 ﻿namespace XamExchange.Services
 {
     using System;
+    using System.Threading.Tasks;
     using Newtonsoft.Json;
     using RestSharp;
     using XamExchange.Models.FixerModels;
@@ -23,10 +24,10 @@
         /// Elenco degli ultimi tassi di conversione.
         /// Viene provvisto anche la data di aggiornamento in formato timestamp.
         /// </returns>
-        public IFixerResponse GetLatestCurrencyExchange()
+        public async Task<IFixerResponse> GetLatestCurrencyExchange()
         {
             var request = this.CreateRequest("latest");
-            var response = this.client.Execute<Currency>(request);
+            var response = await this.client.ExecuteAsync<Currency>(request);
             if (response.IsSuccessful)
                 return response.Data;
             return JsonConvert.DeserializeObject<FixerResponseError>(response.Content);
@@ -36,10 +37,10 @@
         /// Chiama Fixer per farsi restituire l'elenco di tutti i possibili tassi di conversione.
         /// </summary>
         /// <returns>Elenco dei simboli e nomi delle valute convertibili.</returns>
-        public IFixerResponse GetAllCurrencySymbols()
+        public async Task<IFixerResponse> GetAllCurrencySymbols()
         {
             var request = this.CreateRequest("symbols");
-            var response = this.client.Execute<AllSymbols>(request);
+            var response = await this.client.ExecuteAsync<AllSymbols>(request);
             if (response.IsSuccessful)
                 return response.Data;
             return JsonConvert.DeserializeObject<FixerResponseError>(response.Content);
@@ -52,12 +53,12 @@
         /// <param name="from">From date.</param>
         /// <param name="to">To date.</param>
         /// <returns>List of all fluctuation.</returns>
-        public IFixerResponse GetFluctuationFromDateToDate(DateTime from, DateTime to)
+        public async Task<IFixerResponse> GetFluctuationFromDateToDate(DateTime from, DateTime to)
         {
             var request = this.CreateRequest("fluctuation");
             request.AddParameter("start_date", from.ToShortDateString());
             request.AddParameter("end_date", to.ToShortDateString());
-            var response = this.client.Execute<Fluctuations>(request);
+            var response = await this.client.ExecuteAsync<Fluctuations>(request);
             if (response.IsSuccessful)
                 return response.Data;
             return JsonConvert.DeserializeObject<FixerResponseError>(response.Content);
