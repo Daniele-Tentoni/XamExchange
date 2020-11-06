@@ -6,8 +6,6 @@
     using System.Runtime.CompilerServices;
 
     using Xamarin.Forms;
-
-    using XamExchange.Models;
     using XamExchange.Services;
 
     public class BaseViewModel : INotifyPropertyChanged
@@ -20,8 +18,8 @@
         /// </summary>
         public bool IsBusy
         {
-            get { return this.isBusy; }
-            set { _ = this.SetProperty(ref this.isBusy, value); }
+            get { return isBusy; }
+            set { SetProperty(ref isBusy, value); }
         }
 
         string title = string.Empty;
@@ -30,8 +28,8 @@
         /// </summary>
         public string Title
         {
-            get { return this.title; }
-            set { _ = this.SetProperty(ref this.title, value); }
+            get { return title; }
+            set { SetProperty(ref title, value); }
         }
 
         /// <summary>
@@ -54,7 +52,7 @@
 
             backingStore = value;
             onChanged?.Invoke();
-            this.OnPropertyChanged(propertyName);
+            OnPropertyChanged(propertyName);
             return true;
         }
 

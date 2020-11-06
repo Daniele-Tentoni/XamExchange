@@ -15,9 +15,9 @@
 
         public RealmCurrency(CompleteCurrency currency)
         {
-            this.Code = currency.Code;
-            this.Name = currency.Name;
-            this.Rate = currency.Rate;
+            Code = currency.Code;
+            Name = currency.Name;
+            Rate = currency.Rate;
         }
     }
 }

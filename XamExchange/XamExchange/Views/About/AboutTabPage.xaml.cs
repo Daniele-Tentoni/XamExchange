@@ -9,8 +9,8 @@
     {
         public AboutTabPage()
         {
-            this.InitializeComponent();
-            this.BindingContext = new AboutViewModel();
+            InitializeComponent();
+            BindingContext = new AboutViewModel();
         }
     }
 }

@@ -5,16 +5,13 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    Title="About">
+    Title="About"
+    Visual="Material"
+    mc:Ignorable="d">
     <!--  Pages can be added as references or inline  -->
     <ContentPage Title="XamExchange">
         <ScrollView>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
+            <Grid RowDefinitions="Auto, Auto">
                 <StackLayout
                     Grid.Row="0"
                     BackgroundColor="{StaticResource PrimaryLightColor}"
@@ -86,11 +83,7 @@
     </ContentPage>
     <ContentPage Title="Xamarin">
         <ScrollView>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
+            <Grid RowDefinitions="Auto, *">
                 <StackLayout
                     Grid.Row="0"
                     BackgroundColor="{StaticResource PrimaryLightColor}"
@@ -161,11 +154,7 @@
     </ContentPage>
     <ContentPage Title="Who am I?">
         <ScrollView>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
+            <Grid RowDefinitions="Auto, *">
                 <StackLayout
                     Grid.Row="0"
                     BackgroundColor="{StaticResource PrimaryLightColor}"

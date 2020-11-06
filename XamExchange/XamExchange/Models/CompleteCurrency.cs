@@ -10,9 +10,9 @@
 
         public CompleteCurrency(RealmCurrency realm)
         {
-            this.Code = realm.Code;
-            this.Name = realm.Name;
-            this.Rate = realm.Rate;
+            Code = realm.Code;
+            Name = realm.Name;
+            Rate = realm.Rate;
         }
     }
 }

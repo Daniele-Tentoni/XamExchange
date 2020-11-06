@@ -16,15 +16,15 @@
         public FixerDataStore fixerDataStore = null;
 
         [SetUp]
-        public void SetUp() => this.fixerDataStore = new FixerDataStore();
+        public void SetUp() => fixerDataStore = new FixerDataStore();
 
         [Test]
-        public void TestInizialization() => Assert.IsNotNull(this.fixerDataStore);
+        public void TestInizialization() => Assert.IsNotNull(fixerDataStore);
 
         [Test]
         public async Task TestLatestCurrency()
         {
-            var result = await this.fixerDataStore.GetLatestCurrencyExchange();
+            var result = await fixerDataStore.GetLatestCurrencyExchange();
             Assert.IsTrue(result.IsSuccessful());
             var successful = (Currency)result;
             Assert.AreEqual(EUR, successful.Base);
@@ -35,7 +35,7 @@
 
         [Test] public async Task TestGetAllCurrencySymbols()
         {
-            var result = await this.fixerDataStore.GetAllCurrencySymbols();
+            var result = await fixerDataStore.GetAllCurrencySymbols();
             Assert.IsTrue(result.IsSuccessful());
             var success = result as AllSymbols;
             Assert.IsNotNull(success.Symbols);
@@ -47,7 +47,7 @@
         {
             var from = DateTime.Now.AddDays(-1);
             var to = DateTime.Now;
-            var result = await this.fixerDataStore.GetFluctuationFromDateToDate(from, to);
+            var result = await fixerDataStore.GetFluctuationFromDateToDate(from, to);
 
             // Must be false because this is a payment function.
             Assert.IsFalse(result.IsSuccessful());
@@ -56,10 +56,10 @@
         [Test] public async Task TestAddRealmCurrency()
         {
             var tasks = new List<Task>();
-            var symbols = this.fixerDataStore.GetAllCurrencySymbols();
+            var symbols = fixerDataStore.GetAllCurrencySymbols();
             tasks.Add(symbols);
 
-            var currencies = this.fixerDataStore.GetLatestCurrencyExchange();
+            var currencies = fixerDataStore.GetLatestCurrencyExchange();
             tasks.Add(currencies);
 
             await Task.WhenAll(tasks);

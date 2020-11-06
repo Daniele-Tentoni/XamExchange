@@ -15,25 +15,25 @@
         readonly List<HomeMenuItem> menuItems;
         public MenuPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
 
-            this.menuItems = new List<HomeMenuItem>
+            menuItems = new List<HomeMenuItem>
             {
                 new HomeMenuItem {Id = MenuItemType.Exchange, Title = "Exchange" },
                 new HomeMenuItem {Id = MenuItemType.Currencies, Title = "Currencies" },
                 new HomeMenuItem {Id = MenuItemType.About, Title = "About" }
             };
 
-            this.ListViewMenu.ItemsSource = this.menuItems;
+            ListViewMenu.ItemsSource = menuItems;
 
-            this.ListViewMenu.SelectedItem = this.menuItems[0];
-            this.ListViewMenu.ItemSelected += async (sender, e) =>
+            ListViewMenu.SelectedItem = menuItems[0];
+            ListViewMenu.ItemSelected += async (sender, e) =>
             {
                 if (e.SelectedItem == null)
                     return;
 
                 var id = (int)((HomeMenuItem)e.SelectedItem).Id;
-                await this.RootPage.NavigateFromMenu(id);
+                await RootPage.NavigateFromMenu(id);
             };
         }
     }

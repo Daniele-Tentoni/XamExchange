@@ -8,8 +8,8 @@
     {
         public AboutViewModel()
         {
-            this.Title = "About";
-            this.OpenWebCommand = new Command(async (arg) => await Browser.OpenAsync((string)arg));
+            Title = "About";
+            OpenWebCommand = new Command(async (arg) => await Browser.OpenAsync((string)arg));
         }
 
         public ICommand OpenWebCommand { get; }

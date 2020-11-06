@@ -7,8 +7,8 @@
         public CompleteCurrency Item { get; set; }
         public ItemDetailViewModel(CompleteCurrency item = null)
         {
-            this.Title = item.Name;
-            this.Item = item;
+            Title = item.Name;
+            Item = item;
         }
     }
 }

@@ -19,44 +19,34 @@
 
         public CurrenciesViewModel()
         {
-            this.Title = "Currencies";
-            this.Currencies = new ObservableCollection<CompleteCurrency>();
-            this.LoadCurrenciesCommand = new Command(async () => await this.ExecuteLoadCurrenciesCommand());
+            Title = "Currencies";
+            Currencies = new ObservableCollection<CompleteCurrency>();
+            LoadCurrenciesCommand = new Command(async () => await ExecuteLoadCurrenciesCommand());
 
             MessagingCenter.Subscribe<NewItemPage, CompleteCurrency>(this, "AddItem", async (obj, item) =>
             {
-                var newItem = item as CompleteCurrency;
-                this.Currencies.Add(newItem);
-                _ = await this.DataStore.AddOrUpdateItemAsync(newItem);
+                var newItem = item;
+                Currencies.Add(newItem);
+                await DataStore.AddOrUpdateItemAsync(newItem);
             });
         }
 
         async Task ExecuteLoadCurrenciesCommand()
         {
-            if (this.IsBusy)
+            if (IsBusy)
                 return;
 
-            this.IsBusy = true;
+            IsBusy = true;
 
             try
             {
-                this.Currencies.Clear();
-                var fixer = new FixerDataStore();
-                var symbols =  fixer.GetAllCurrencySymbols();
-                var rates =  fixer.GetLatestCurrencyExchange();
-                if (symbols.IsSuccessful() && rates.IsSuccessful())
+                Currencies.Clear();
+
+                var dataStore = DependencyService.Get<CurrencyDataStore>();
+                var currencies = await dataStore.GetItemsAsync();
+                foreach (var currency in currencies)
                 {
-                    var fsymbols = (AllSymbols)symbols;
-                    var frates = (Currency)rates;
-                    foreach (var symbol in fsymbols.Symbols)
-                    {
-                        this.Currencies.Add(new CompleteCurrency
-                        {
-                            Code = symbol.Key,
-                            Name = symbol.Value,
-                            Rate = (double)frates.Rates[symbol.Key]
-                        });
-                    }
+                    Currencies.Add(currency);
                 }
             }
             catch (Exception ex)
@@ -65,7 +55,7 @@
             }
             finally
             {
-                this.IsBusy = false;
+                IsBusy = false;
             }
         }
     }

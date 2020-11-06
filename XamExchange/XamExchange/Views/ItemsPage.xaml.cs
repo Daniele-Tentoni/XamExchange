@@ -16,9 +16,9 @@
 
         public ItemsPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
 
-            this.BindingContext = this.viewModel = new CurrenciesViewModel();
+            BindingContext = viewModel = new CurrenciesViewModel();
         }
 
         async void OnCurrencySelected(object sender, SelectedItemChangedEventArgs args)
@@ -26,20 +26,20 @@
             if (!(args.SelectedItem is CompleteCurrency item))
                 return;
 
-            await this.Navigation.PushAsync(new ItemDetailPage(new ItemDetailViewModel(item)));
+            await Navigation.PushAsync(new ItemDetailPage(new ItemDetailViewModel(item)));
 
             // Manually deselect item.
-            this.CurrencyListView.SelectedItem = null;
+            CurrencyListView.SelectedItem = null;
         }
 
-        async void AddItem_Clicked(object sender, EventArgs e) => await this.Navigation.PushModalAsync(new NavigationPage(new NewItemPage()));
+        async void AddItem_Clicked(object sender, EventArgs e) => await Navigation.PushModalAsync(new NavigationPage(new NewItemPage()));
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
 
-            if (this.viewModel.Currencies.Count == 0)
-                this.viewModel.LoadCurrenciesCommand.Execute(null);
+            if (viewModel.Currencies.Count == 0)
+                viewModel.LoadCurrenciesCommand.Execute(null);
         }
     }
 }

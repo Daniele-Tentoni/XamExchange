@@ -9,31 +9,17 @@
     Visual="Material"
     mc:Ignorable="d">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Command="{Binding LoadCurrenciesCommand}" Text="Refresh" />
+        <ToolbarItem Command="{Binding RefreshCurrenciesCommand}" Text="Refresh" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout Padding="10">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="3*" />
-                </Grid.ColumnDefinitions>
-
+            <Grid ColumnDefinitions="*, 3*" RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto">
                 <Label
                     Grid.Row="0"
                     Grid.Column="0"
                     Grid.ColumnSpan="2"
-                    HorizontalOptions="CenterAndExpand"
                     FontSize="Medium"
+                    HorizontalOptions="CenterAndExpand"
                     Text="Use this form to convert all currencies!"
                     VerticalOptions="CenterAndExpand" />
 
@@ -47,16 +33,17 @@
                 <Picker
                     Grid.Row="1"
                     Grid.Column="0"
-                    VerticalOptions="End"
                     ItemsSource="{Binding PickerCurrencies, Mode=TwoWay}"
-                    SelectedIndex="{Binding FromSelected}" />
+                    SelectedIndex="{Binding FromSelected}"
+                    VerticalOptions="End" />
 
                 <Label
                     Grid.Row="2"
-                    Grid.Column="0" Grid.ColumnSpan="2"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    FontSize="Large"
                     HorizontalOptions="CenterAndExpand"
                     Text="Convert to"
-                    FontSize="Large"
                     VerticalOptions="CenterAndExpand" />
 
                 <Entry
@@ -68,9 +55,9 @@
                 <Picker
                     Grid.Row="3"
                     Grid.Column="0"
-                    VerticalOptions="End"
                     ItemsSource="{Binding PickerCurrencies, Mode=TwoWay}"
-                    SelectedIndex="{Binding ToSelected}" />
+                    SelectedIndex="{Binding ToSelected}"
+                    VerticalOptions="End" />
 
                 <Label
                     Grid.Row="4"

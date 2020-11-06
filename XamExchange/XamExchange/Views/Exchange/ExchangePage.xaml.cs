@@ -11,21 +11,20 @@
 
         public ExchangePage()
         {
-            this.InitializeComponent();
-            this.BindingContext = this.viewModel = new ExchangeViewModel();
+            InitializeComponent();
+            BindingContext = viewModel = new ExchangeViewModel();
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
 
-            if (this.viewModel.Currencies.Count == 0)
-                this.viewModel.LoadCurrenciesCommand.Execute(null);
+            if (viewModel.Currencies.Count == 0)
+                viewModel.LoadCurrenciesCommand.Execute(null);
         }
 
-        void Entry_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            this.viewModel.ExchangeCurrenciesCommand.Execute(null);
-        }
+        void Entry_TextChanged(object sender, TextChangedEventArgs e) =>
+            // TODO: Put this binding in the xaml.
+            viewModel.ExchangeCurrenciesCommand.Execute(null);
     }
 }

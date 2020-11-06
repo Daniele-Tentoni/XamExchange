@@ -18,7 +18,7 @@
             get => Preferences.Get("last_update", DateTime.Now);
             set {
                 Preferences.Set("last_update", value);
-                this.OnPropertyChanged(nameof(this.LastUpdate));
+                OnPropertyChanged(nameof(LastUpdate));
             }
         }
 
@@ -29,83 +29,74 @@
         private int _fromSelected;
         public int FromSelected
         {
-            get => this._fromSelected;
-            set => this.SetProperty(ref this._fromSelected, value);
+            get => _fromSelected;
+            set => SetProperty(ref _fromSelected, value);
         }
         private int _toSelected;
         public int ToSelected
         {
-            get => this._toSelected;
-            set => this.SetProperty(ref this._toSelected, value);
+            get => _toSelected;
+            set => SetProperty(ref _toSelected, value);
         }
 
         private string _fromText;
         public string FromText
         {
-            get => this._fromText;
-            set => this.SetProperty(ref this._fromText, value);
+            get => _fromText;
+            set => SetProperty(ref _fromText, value);
         }
         private string _toText;
         public string ToText
         {
-            get => this._toText;
-            set => this.SetProperty(ref this._toText, value);
+            get => _toText;
+            set => SetProperty(ref _toText, value);
         }
 
         public Command LoadCurrenciesCommand { get; set; }
 
         public Command ExchangeCurrenciesCommand { get; set; }
 
+        public Command RefreshCurrenciesCommand { get; set; }
+
         public ExchangeViewModel()
         {
-            this.Title = "Exchange";
-            this.Currencies = new ObservableCollection<CompleteCurrency>();
-            this.PickerCurrencies = new ObservableCollection<string>();
-            this.Currencies.CollectionChanged += (sender, e) =>
+            Title = "Exchange";
+            Currencies = new ObservableCollection<CompleteCurrency>();
+            PickerCurrencies = new ObservableCollection<string>();
+            Currencies.CollectionChanged += (sender, e) =>
             {
                 if (e.Action == NotifyCollectionChangedAction.Add)
                 {
                     foreach (CompleteCurrency item in e.NewItems)
                     {
-                        this.PickerCurrencies.Add($"{item.Code}");
+                        PickerCurrencies.Add($"{item.Code}");
                     }
                 }
                 else if (e.Action == NotifyCollectionChangedAction.Reset)
                 {
-                    this.PickerCurrencies.Clear();
+                    PickerCurrencies.Clear();
                 }
             };
-            this.LoadCurrenciesCommand = new Command(async () => await this.ExecuteLoadCurrenciesCommand());
-            this.ExchangeCurrenciesCommand = new Command(async () => await this.ExecuteExchangeCurrenciesCommand());
+            LoadCurrenciesCommand = new Command(async () => await ExecuteLoadCurrenciesCommand());
+            ExchangeCurrenciesCommand = new Command(async () => await ExecuteExchangeCurrenciesCommand());
+            RefreshCurrenciesCommand = new Command(async () => await ExecuteRefreshCurrenciesCommand());
         }
 
         private async Task ExecuteLoadCurrenciesCommand()
         {
-            if (this.IsBusy)
+            if (IsBusy)
                 return;
 
-            this.IsBusy = true;
+            IsBusy = true;
 
             try
             {
-                this.Currencies.Clear();
-                var fixer = new FixerDataStore();
-                var symbols =  fixer.GetAllCurrencySymbols();
-                var rates =  fixer.GetLatestCurrencyExchange();
-                if (symbols.IsSuccessful() && rates.IsSuccessful())
+                Currencies.Clear();
+                var dataStore = DependencyService.Get<CurrencyDataStore>();
+                var currencies = await dataStore.GetItemsAsync();
+                foreach(var currency in currencies)
                 {
-                    var fsymbols = (AllSymbols)symbols;
-                    var frates = (Currency)rates;
-                    this.LastUpdate = DateTimeOffset.FromUnixTimeSeconds(frates.Timestamp).LocalDateTime;
-                    foreach (var symbol in fsymbols.Symbols)
-                    {
-                        this.Currencies.Add(new CompleteCurrency
-                        {
-                            Code = symbol.Key,
-                            Name = symbol.Value,
-                            Rate = (double)frates.Rates[symbol.Key]
-                        });
-                    }
+                    Currencies.Add(currency);
                 }
             }
             catch (Exception ex)
@@ -114,24 +105,24 @@
             }
             finally
             {
-                this.IsBusy = false;
+                IsBusy = false;
             }
         }
 
         async Task ExecuteExchangeCurrenciesCommand()
         {
-            if (this.IsBusy)
+            if (IsBusy)
                 return;
-            this.IsBusy = true;
+            IsBusy = true;
 
             try
             {
-                var res = double.TryParse(this.FromText, out double from);
+                var res = double.TryParse(FromText, out double from);
                 if (res)
                 {
-                    var fromRate = this.Currencies[this.FromSelected].Rate;
-                    var toRate = this.Currencies[this.ToSelected].Rate;
-                    this.ToText = (from / fromRate * toRate).ToString();
+                    var fromRate = Currencies[FromSelected].Rate;
+                    var toRate = Currencies[ToSelected].Rate;
+                    ToText = (from / fromRate * toRate).ToString();
                 }
                 else
                     Debug.WriteLine("[Exchange] Parse error.");
@@ -143,7 +134,29 @@
             }
             finally
             {
-                this.IsBusy = false;
+                IsBusy = false;
+            }
+        }
+
+        async Task ExecuteRefreshCurrenciesCommand()
+        {
+            if (IsBusy)
+                return;
+            IsBusy = true;
+
+            try
+            {
+                await App.LoadFixerData();
+                IsBusy = false;
+                await ExecuteLoadCurrenciesCommand();
+            }
+            catch(Exception e)
+            {
+                Debug.WriteLine(e.StackTrace);
+            }
+            finally
+            {
+                IsBusy = false;
             }
         }
     }
